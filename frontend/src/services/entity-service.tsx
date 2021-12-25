@@ -59,12 +59,20 @@ class EntityService {
     return this.typeFilter<T>(this.entityList, this.isMessage);
   }
   update(entities: any[]) {
-    this.entityList = [];
+    let message = this.getLatestMessage();
+    if (message) {
+      this.entityList = [message];
+    } else {
+      this.entityList = [];
+    }
     for (let i in entities) {
       let entity = entities[i];
       entity.type = 'message'; // TODO hack atm, backend doesnt support sending over type
       switch (entity.type) {
         case 'message':
+          if(message && entity.uid == message.uid && entity.inProgress) {
+            continue;
+          }
           this.createMessage(entity.uid, entity.position.x, entity.position.y, entity.color.red, entity.color.green, entity.color.blue, entity.inProgress, entity.message);
           break;
         default:

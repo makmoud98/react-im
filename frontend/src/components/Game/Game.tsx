@@ -218,7 +218,7 @@ class Board extends React.Component {
       if (entity.render) {
         entityElement = entity.render();
       }
-      let element = <div key={i} className={`entity ${entity.type}`} style={elementStyle}>{entityElement}</div>
+      let element = <div key={i} className="entity" style={elementStyle}>{entityElement}</div>
       entityElements.push(element);
     }
     return (

@@ -45,7 +45,7 @@ class Message extends React.Component implements Entity {
     }
 
     return (
-      <div className="player-name" style={messageStyle} dangerouslySetInnerHTML={{__html: message}}></div>
+      <div className="message" style={messageStyle} dangerouslySetInnerHTML={{__html: message}}></div>
     );
   }
 };
