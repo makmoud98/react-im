@@ -11,14 +11,14 @@ app.use(bodyParser.raw());
 let entities = [];
 
 function getEntitiesByUID(uid) {
-    return entities.filter((entity) => entity.uid == uid);
+  return entities.filter((entity) => entity.uid == uid);
 }
 
 function getLatestEntityByUID(uid) {
   let myEntities = getEntitiesByUID(uid);
   myEntities = myEntities.filter((entity) => entity.inProgress);
   myEntities.sort((a, b) => {
-    return a.last_ping - b.last_ping;
+    return a.lastPing - b.lastPing;
   });
   if (myEntities.length > 0) {
     return myEntities[0];
@@ -63,9 +63,10 @@ app.post('/api/data', (req, res) => {
     entity.position.y = y;
     entity.message = message;
     entity.inProgress = inProgress;
+    entity.lastPing = getCurrentTime();
   } else {
     let entity = req.body;// todo find a more secure way for this
-    entity.last_ping = getCurrentTime();
+    entity.lastPing = getCurrentTime();
     entity.inProgress = true;
     entities.push(entity);
   }

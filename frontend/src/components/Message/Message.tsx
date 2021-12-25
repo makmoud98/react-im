@@ -39,14 +39,11 @@ class Message extends React.Component implements Entity {
     let messageStyle = {
       backgroundColor: 'rgb(' + this.color.red.toString() + ', ' + this.color.green.toString() + ', ' + this.color.blue.toString() + ')'
     };
-    let message = this.message;
     if (this.isImage(this.message)) {
-      message = '<img src="' + message + '"/>';
+      return <img className="message message-image" alt="message image" src={this.message}/>
+    } else {
+      return <div className="message" style={messageStyle} dangerouslySetInnerHTML={{__html: this.message}}></div>
     }
-
-    return (
-      <div className="message" style={messageStyle} dangerouslySetInnerHTML={{__html: message}}></div>
-    );
   }
 };
 

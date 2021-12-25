@@ -32,7 +32,7 @@ class InputHandler extends React.Component<{}, { message: string }> {
   }
   componentDidUpdate() {
     let latestMessage = EntityService.getLatestMessage()
-    if (latestMessage && this.state.message == '' && latestMessage.message != '') {
+    if (latestMessage && this.state.message === '' && latestMessage.message !== '') {
       this.setState({message: latestMessage.message});
     }
   }
@@ -150,6 +150,7 @@ class InputHandler extends React.Component<{}, { message: string }> {
         randomColor.g,
         randomColor.b,
         true,
+        (new Date()).getSeconds(),
         event.target.value
       );
       GameService.update(newMessage).then(() => that.game.update());
@@ -183,12 +184,12 @@ class InputHandler extends React.Component<{}, { message: string }> {
     return (
       <div className="input-handler">
         <div className="joystick-container">
-          <img className="joystick-img" src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKkAAACpCAYAAABQ1R0vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAU3SURBVHhe7d1PahRBGIbxjEdwI3giQcGFguA6Z3AjuBDceIasBSEuBAVPJLjxCmol3WYy03+qqquq3/q+5wfR1mjPYD9+1d3RmcPFgpfPn/4ZNoGqrr9+n21x8hPEib1MxXrvJ4gTKo5j/b9BoFAzhvrg5keAsJtSmaJQFaYpkxTyDrlT9OrqatgC4lxeXg5baZIjJU5slRprdKTEidJiY406JyVQ1BDbFRdOkLcaKVMUNcX0xSSFvMULp6XKf//6OWwBcR4+ejxsnVu6iGKSQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh4vR57hzdt3w1acjx/eD1u+5b4cOZFGSI1yjddoibSw0mHO8RQsb+xQSIizVaBB68frEZEO9o6FWOe5j1QtDmI95zpS5RgI9Y7LSHuZVr08z9rcRdrjQfceqqtIez7YnkN1c5+09EF+9ezJsLXs87cfw1YZPd9X5Wb+ghKBxka5pkS0vYbKzfwZWwMNcZYKNCixP29Lv+lItxzM0nGe2rp/T6G6unCKVTPOUy0fq1dmI82ZNFunW67cx/UyTU1Gmhvo3gh1Gsv9PwqBjpSeiwpzkaZOFsUoUp+T9WnqepIqTy0m6h1TkbaeKOHG/NJHS5anqdtJmjupUiJM+bVTmKa3zESaMkm2BJqrRahWp6nrc9JYW6bhsVL78cZdpKlTtEZUqfv0vuybiLTWMldz6tXat8Ul39Uk7XkieZ6mnJPOaHHu2OIxLCDSCS3jIdR13Udq+SZ2Lmt/Jm4mqYVzOq/npSz3J/ZYflnylxEp5BEp5BEp5BEp5BEp5BEp5BEp5BHpiT1umHv+xyMx3ERq4Ya515v+3UfKG3mds/ZnwnI/oeXyy1K/jkhntIiHQOO4irTnczrP/wjFRKS1zsFqTrpa+7Z4ju5uuU+dSDViSt2n5ykacE4aIURVItZS+/HGTKQpy1zuZNoSWO7vTXmuVm/HuZ2kW0KNnYgpv3aK92V+ZO4tclL+E1puPK1Ym6K8RU4G5UnFFL1jLtLUiaIYQ+pzsnouOnI9SUdKoTJBz5mMNGeyKMSR8xysT9HA7CTNDXWPWHMf10OgAcv9hJah7vGXojemI90yaXKnW6yt+/cyRQPzk3TrwSwda4n9eQo0cPF+90HpV5qL/UJAycCDngPNvZnvJtKg95dE7H2C8hWnCD0fZG9L/DFXkQY9HmzPgQbuIg3CQe/hwPfyPGtzGelIOQDivOM60kBtWqk9HwXuIx3tHQdxziPSE61jIc51ru6T5ip9f9VrlNzMbyg1WiblLSKFPL7iBLOIFPKIFPKIFPKIFPKIFPKIFPKIFPKIFPKIFPKIFPJ2ifTPpy9nH8CcppEuBUmsmNMs0tgACRWnmkSaGh6h4hgXTpBXPdLcqcg0xYhJCnlECnlECnlECnnVIz28fjFspcn9fbCHSQp5TSJNnYpMURxrNkljwyNQnGq63IcA5yJc+hx82+WcdAzy+AOYw4UT5BEp5BEp5BEp5BEp5BEp5BEp5BEp5C2+Zn6w9Lr5QAlLr5cfMEkhbzXStcqBLWL6YpJCXlSkTFPUENvV6oXTKS6ksFXq0EuOdESsSJW7Ih/CN7mhArVdf/1+4MIJ8m4macA0hZowRcP3TFLI+z9JA6YpVIxTNLgX6YhYsZfjOEeTkY6IFa1MxXnr4uIvs8cwhbuaqyMAAAAASUVORK5CYII='}/>
+          <img className="joystick-img" alt="joystick" src={'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKkAAACpCAYAAABQ1R0vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAU3SURBVHhe7d1PahRBGIbxjEdwI3giQcGFguA6Z3AjuBDceIasBSEuBAVPJLjxCmol3WYy03+qqquq3/q+5wfR1mjPYD9+1d3RmcPFgpfPn/4ZNoGqrr9+n21x8hPEib1MxXrvJ4gTKo5j/b9BoFAzhvrg5keAsJtSmaJQFaYpkxTyDrlT9OrqatgC4lxeXg5baZIjJU5slRprdKTEidJiY406JyVQ1BDbFRdOkLcaKVMUNcX0xSSFvMULp6XKf//6OWwBcR4+ejxsnVu6iGKSQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh6RQh4vR57hzdt3w1acjx/eD1u+5b4cOZFGSI1yjddoibSw0mHO8RQsb+xQSIizVaBB68frEZEO9o6FWOe5j1QtDmI95zpS5RgI9Y7LSHuZVr08z9rcRdrjQfceqqtIez7YnkN1c5+09EF+9ezJsLXs87cfw1YZPd9X5Wb+ghKBxka5pkS0vYbKzfwZWwMNcZYKNCixP29Lv+lItxzM0nGe2rp/T6G6unCKVTPOUy0fq1dmI82ZNFunW67cx/UyTU1Gmhvo3gh1Gsv9PwqBjpSeiwpzkaZOFsUoUp+T9WnqepIqTy0m6h1TkbaeKOHG/NJHS5anqdtJmjupUiJM+bVTmKa3zESaMkm2BJqrRahWp6nrc9JYW6bhsVL78cZdpKlTtEZUqfv0vuybiLTWMldz6tXat8Ul39Uk7XkieZ6mnJPOaHHu2OIxLCDSCS3jIdR13Udq+SZ2Lmt/Jm4mqYVzOq/npSz3J/ZYflnylxEp5BEp5BEp5BEp5BEp5BEp5BEp5BHpiT1umHv+xyMx3ERq4Ya515v+3UfKG3mds/ZnwnI/oeXyy1K/jkhntIiHQOO4irTnczrP/wjFRKS1zsFqTrpa+7Z4ju5uuU+dSDViSt2n5ykacE4aIURVItZS+/HGTKQpy1zuZNoSWO7vTXmuVm/HuZ2kW0KNnYgpv3aK92V+ZO4tclL+E1puPK1Ym6K8RU4G5UnFFL1jLtLUiaIYQ+pzsnouOnI9SUdKoTJBz5mMNGeyKMSR8xysT9HA7CTNDXWPWHMf10OgAcv9hJah7vGXojemI90yaXKnW6yt+/cyRQPzk3TrwSwda4n9eQo0cPF+90HpV5qL/UJAycCDngPNvZnvJtKg95dE7H2C8hWnCD0fZG9L/DFXkQY9HmzPgQbuIg3CQe/hwPfyPGtzGelIOQDivOM60kBtWqk9HwXuIx3tHQdxziPSE61jIc51ru6T5ip9f9VrlNzMbyg1WiblLSKFPL7iBLOIFPKIFPKIFPKIFPKIFPKIFPKIFPKIFPKIFPKIFPJ2ifTPpy9nH8CcppEuBUmsmNMs0tgACRWnmkSaGh6h4hgXTpBXPdLcqcg0xYhJCnlECnlECnlECnnVIz28fjFspcn9fbCHSQp5TSJNnYpMURxrNkljwyNQnGq63IcA5yJc+hx82+WcdAzy+AOYw4UT5BEp5BEp5BEp5BEp5BEp5BEp5BEp5C2+Zn6w9Lr5QAlLr5cfMEkhbzXStcqBLWL6YpJCXlSkTFPUENvV6oXTKS6ksFXq0EuOdESsSJW7Ih/CN7mhArVdf/1+4MIJ8m4macA0hZowRcP3TFLI+z9JA6YpVIxTNLgX6YhYsZfjOEeTkY6IFa1MxXnr4uIvs8cwhbuaqyMAAAAASUVORK5CYII='}/>
           <div id="joystick" className="joystick"></div>
         </div>
         <div className="connect-info">
           <input className="input" type="hidden" onKeyDown={this.handleKeyboard}/>
-          <textarea className="input-player-name" value={this.state.message} placeholder={'Enter a message'} onChange={this.handleChange}></textarea>
+          <textarea className="input-message" value={this.state.message} placeholder={'Enter a message'} onChange={this.handleChange}></textarea>
           <button className="start-btn" onClick={this.handleSubmit}>SUBMIT</button>
         </div>
       </div>
@@ -207,8 +208,9 @@ class Board extends React.Component {
   render() {
     let entityList: Entity[] = EntityService.get();
     let entityElements: JSX.Element[] = [];
-    for (let i in entityList) {
-      let entity: Entity = entityList[i];
+    let sortedEntityList = entityList.sort((a, b) => a.lastPing - b.lastPing);
+    for (let i in sortedEntityList) {
+      let entity: Entity = sortedEntityList[i];
       let elementStyle: any = {
         left: entity.position.x.toString() + 'px',
         top: 'calc(20% + ' + entity.position.y.toString() + 'px)',// TODO improve starting pos calculation

@@ -19,6 +19,7 @@ class EntityService {
     green: number,
     blue: number,
     inProgress: boolean,
+    lastPing: number,
     message: string
   ): Message {
     let messageEntity = new Message(x, y, message);
@@ -26,6 +27,7 @@ class EntityService {
     messageEntity.setColor(color);
     messageEntity.setUID(uid);
     messageEntity.inProgress = inProgress;
+    messageEntity.lastPing = lastPing;
     this.entityList.push(messageEntity);
     return messageEntity;
   }
@@ -70,10 +72,10 @@ class EntityService {
       entity.type = 'message'; // TODO hack atm, backend doesnt support sending over type
       switch (entity.type) {
         case 'message':
-          if(message && entity.uid == message.uid && entity.inProgress) {
+          if(message && entity.uid === message.uid && entity.inProgress) {
             continue;
           }
-          this.createMessage(entity.uid, entity.position.x, entity.position.y, entity.color.red, entity.color.green, entity.color.blue, entity.inProgress, entity.message);
+          this.createMessage(entity.uid, entity.position.x, entity.position.y, entity.color.red, entity.color.green, entity.color.blue, entity.inProgress, entity.lastPing, entity.message);
           break;
         default:
           console.error('Unsupported entity type: ' + entity.type);
