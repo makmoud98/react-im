@@ -1,0 +1,10 @@
+.message {
+    color: white;
+    font-size: 20px;
+    font-family: "Comic Sans MS", "Comic Sans";
+    z-index: inherit;
+}
+.message-image {
+    width: 200px;
+    z-index: inherit;
+}

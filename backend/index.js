@@ -4,11 +4,24 @@ const app = express()
 const port = 3001
 const EXPIRE_TIME = 86400;
 const EDIT_TIME = 120;
+const ACTIVE_TIME = 5;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.raw());
 
 let entities = [];
+let users = {};
+
+function getActiveUserCount() {
+  let activeUserCount = 0;
+  for (let uid in users) {
+    let lastPing = users[uid];
+    if (getCurrentTime() - lastPing < ACTIVE_TIME) {
+      activeUserCount += 1;
+    }
+  }
+  return activeUserCount;
+}
 
 function getEntitiesByUID(uid) {
   return entities.filter((entity) => entity.uid == uid);
@@ -28,7 +41,7 @@ function getLatestEntityByUID(uid) {
 }
 
 function getCurrentTime() {
-  return (new Date()).getSeconds();
+  return Math.floor(Date.now() / 1000);
 }
 
 setInterval(() => {
@@ -44,8 +57,16 @@ setInterval(() => {
   }
 }, 200)
 
+setInterval(() => {
+  console.log('active users: ' + getActiveUserCount());
+}, 1000)
+
 app.get('/api/data', (req, res) => {
-  res.json({entities: entities});
+  let uid = req.query.uid;
+  if (typeof uid == 'string') {
+    users[uid] = getCurrentTime();
+  }
+  res.json({entities: entities, activeUserCount: getActiveUserCount()});
 });
 app.post('/api/data', (req, res) => {
   let uid = req.body.uid;
@@ -72,6 +93,9 @@ app.post('/api/data', (req, res) => {
   }
   if (message == 'clear!') {
     entities = [];
+  }
+  if (uid) {
+    users[uid] = getCurrentTime();
   }
   res.json({entities: entities})
 });

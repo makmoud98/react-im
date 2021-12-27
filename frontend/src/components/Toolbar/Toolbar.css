@@ -1,0 +1,52 @@
+.toolbar {
+  display: flex;
+  position: fixed;
+  background-color: black;
+  width: 100%;
+  height: 10%;
+  justify-content: flex-start;
+  align-self: flex-end;
+}
+.message-input-container {
+  width: 100%;
+}
+.input-message {
+  width: 80%;
+}
+.submit-btn-container {
+  width: 10%;
+}
+.joystick-container {
+  width: 10%;
+  height: 100%;
+}
+.spacing {
+  display: flex;
+  width: 20px;
+}
+@media only screen and (max-width: 400px) {
+  .toolbar {
+    height: auto  ;
+  }
+  .message-input-container {
+    flex-wrap: wrap;
+    border: 1px solid black;
+  }
+  .spacing {
+    width: 0px;
+  }
+  .input-message {
+    width: 100%;
+    height: 30px;
+    border-bottom: 1px solid black;
+  }
+  .submit-btn-container {
+    border: none;
+    width: 50%;
+    height: 100px;
+  }
+  .joystick-container {
+    width: 50%;
+    height: auto;
+  }
+}

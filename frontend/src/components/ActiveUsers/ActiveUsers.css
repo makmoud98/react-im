@@ -1,0 +1,20 @@
+.active-users-container {
+  display: flex;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  justify-content: flex-start;
+  align-items: center;
+  width: auto;
+  padding-left: 4px;
+  padding-right: 4px;
+  height: 25px;
+  background-color: black;
+}
+.active-users-label {
+  display: flex;
+  width: 100%;
+  font-size: 20px;
+  color: white;
+  justify-content: center;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import Entity from '../../interfaces/Entity';
 import Color from '../../interfaces/Color';
 import Position from '../../interfaces/Position';
+import './Message.css';
 
 class Message extends React.Component implements Entity {
   uid?: string;
@@ -40,9 +41,10 @@ class Message extends React.Component implements Entity {
       backgroundColor: 'rgb(' + this.color.red.toString() + ', ' + this.color.green.toString() + ', ' + this.color.blue.toString() + ')'
     };
     if (this.isImage(this.message)) {
-      return <img className="message message-image" alt="message image" src={this.message}/>
+      return <img className="message message-image" alt="message" src={this.message}/>
     } else {
-      return <div className="message" style={messageStyle} dangerouslySetInnerHTML={{__html: this.message}}></div>
+      let message = this.message.split('\n').join('<br/>');
+      return <div className="message" style={messageStyle} dangerouslySetInnerHTML={{__html: message}}></div>
     }
   }
 };

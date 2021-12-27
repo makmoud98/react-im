@@ -1,0 +1,22 @@
+.joystick-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.joystick-img {
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    height: 100%;
+}
+.joystick {
+    display: flex;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 100%;
+    cursor: pointer;
+}
